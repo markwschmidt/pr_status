@@ -121,7 +121,7 @@ fn notify_pr_finish(status: &PullRequestStatus) -> Result<()> {
 
 fn main() -> Result<()> {
 
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).target(env_logger::Target::Stdout).init();
 
     let config : Config =  serde_json::from_str(&fs::read_to_string("secrets.txt")?)?;
 
@@ -160,6 +160,5 @@ fn main() -> Result<()> {
         out_prs.push(new_pr);
     }
     fs::write("prs.json", serde_json::to_string_pretty(&out_prs)?)?;
-    println!("blah");
     Ok(())
 }

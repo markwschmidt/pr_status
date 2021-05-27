@@ -2,6 +2,9 @@
 
 This is a simple utility that can be used by Ocient employees to automatically check the status of their PRs
 
+There's quite a bit of setup, so please follow these instructions closely and message me if you need help!
+Open to PRs and any other improvements for this (or just bake it into CI so I don't have to do hacky shit like this)
+
 ## Installation
 
 1. Install libssl-dev
@@ -51,16 +54,27 @@ In the root directory of pr_status, create a file called secrets.txt with the fo
 https://github.com/dschep/ntfy
 
 I use the Pushbullet integration to get notifications sent to my phone/desktop
-It's also useful to get notified when a build or test run finishes
+It's also useful to get notified when a build or test run finishes.
+
+You can test it with `ntfy send "this is a test"`
 
 7. Run `cargo run`
 
-This will build and run the binary. You should see a "prs.json" file created in the root directory with all 
+This will build and run the binary. You should see a "prs.json" file created in the root directory with info about all of your active PRs
 
 8. Update cron to run every 5 minutes
 
-Run `crontab -e` and add this line
+Run `crontab -e` and add these lines:
 
+
+Add `cargo` and `ntfy` to your path in crontab
+```
+PATH=/home/<local_username>/.cargo/bin:/home/<local_username>/.local/bin/:$PATH 
 ```
 
+Run the command every five minutes
+```
+*/5 * * * * cd <YOUR/PR_STATUS/DIRECTORY/WITH/SECRETS.TXT> && cargo run > pr_status.log
 ``
+
+9. Wait for PRs to finish and get notified!
