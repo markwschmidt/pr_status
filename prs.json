@@ -1,0 +1,12 @@
+[
+  {
+    "number": 17252,
+    "state": "failure",
+    "pipeline_url": "https://gitlab.com/ocient/xgsrc/-/pipelines/310205757"
+  },
+  {
+    "number": 17251,
+    "state": "success",
+    "pipeline_url": "https://gitlab.com/ocient/xgsrc/-/pipelines/310205751"
+  }
+]
