@@ -73,7 +73,7 @@ fn is_done(state: &GitlabStatus) -> bool {
 }
 
 fn fetch_my_prs(config: &Config, client: &Client) -> Result<Vec<ApiPullRequest>> {
-    Ok(client.get(format!("https://api.github.com/repos/{}/pulls", config.repo))
+    Ok(client.get(format!("https://api.github.com/repos/{}/pulls?per_page=100", config.repo))
         .send()?
         .json::<Vec<ApiPullRequest>>()?
         .into_iter()
